@@ -1,0 +1,42 @@
+# ===== Keil 编译产物 =====
+Objects/
+Listings/
+*.o
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.htm
+*.build_log.htm
+*.dep
+*.crf
+*.d
+*.iex
+*.htm
+*.lnp
+
+# ===== CubeMX 生成 =====
+*.ioc
+Drivers/STM32F1xx_HAL_Driver/
+Drivers/CMSIS/
+
+# ===== PCB / 硬件 =====
+Hardware/*.zip
+Hardware/*.gbr
+Hardware/*.drl
+Hardware/*.csv
+!Hardware/*.pdf
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.uvguix
+*.uvoptx
+*.bak
+*.tmp
+
+# ===== 系统文件 =====
+Thumbs.db
+.DS_Store
+desktop.ini
