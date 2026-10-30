@@ -1,18 +1,35 @@
 #include "stm32f10x.h"                  // Device header
+#include "LED.h"
+#include "KEY.h"
+#include "OLED.h"
+#include "Serial.h"
+
+
+uint8_t KeyNum;
 int main(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-	GPIO_InitTypeDef GPIO_InitStructure;//局部定义结构体
+	LED_Init();
+	Key_Init();
+	OLED_Init();
+	Serial_Init();
 	
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0; 
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//结构体成员
 	
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	OLED_ShowString(1,1,"Oliver Qian");
+	OLED_ShowString(2,1,"Frank Underwood");
 	
-	GPIO_ResetBits(GPIOA,GPIO_Pin_0);
+	Serial_SendByte(0x41);
+	
 	while(1)
 	{
+		
+		KeyNum = Key_GetNum();
+		if(KeyNum == 1)
+		{
+			LED1_ON();
+			LED2_TURN();
+		}
 			
+		if(KeyNum == 2)
+			LED1_OFF();
 	}	
 }
