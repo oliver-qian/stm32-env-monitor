@@ -748,6 +748,11 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\OLED_Font.h</FilePath>
             </File>
+            <File>
+              <FileName>dht11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\dht11.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

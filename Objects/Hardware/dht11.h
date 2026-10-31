@@ -1,15 +1,26 @@
 #ifndef __dht11_H
 #define __dht11_H
+#include "stm32f10x.h"
 /*********************首先进行宏定义*******************
 宏定义：1.给常量/对象起名字
 		2.把长表达式包成短名字（函数式宏）
 		3.条件编译（决定"哪段代码参与编译"）
 		4.头文件守卫
-		5. 预定义宏（编译器自带的，调试很有用）
+		5.预定义宏（编译器自带的，调试很有用）
 		
 ******************************************************/
 #define DHT11_PORT GPIOA
 #define DHT11_PIN GPIO_Pin_7
 
+/*dht11写入*/
+#define DHT11_OUT(level)  GPIO_WriteBit(DHT11_PORT, DHT11_PIN, (BitAction)(level))
+//(BitAction)(level) = (类型名) 触发强制转换
 
+/*dht11读取*/
+#define DHT11_IN()        GPIO_ReadInputDataBit(DHT11_PORT, DHT11_PIN)
+
+
+void DHT11_Init(void);
+uint8_t DHT11_Start(void);
+void DHT11_GetData(void);
 #endif

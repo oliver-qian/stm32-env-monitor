@@ -11,20 +11,54 @@ void DHT11_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(DHT11_PORT, &GPIO_InitStructure); 
 
-    DHT11_OUT(1);              
+    DHT11_OUT(1);  //开始等待DHT11_Start让dht11接受            
 }
 
 
-void DHT11_Start()
+uint8_t static DHT11_WaitLevel(uint8_t level,uint8_t timeout_us)		//level是要等timeout_us后变成的
 {
-	DHT11_OUT(0);      /* ① 主机拉低总线 */
-    Delay_ms(20);      /* ② 保持 ≥18ms，DHT11 才认这是起始信号 */
-    DHT11_OUT(1);      /* ③ 释放总线（开漏，靠 10k 上拉拉高） */
-    Delay_us(30);      /* ④ 保持高 20~40us，等 DHT11 回应 */
+	while(DHT11_IN() !=level)		//读取是否和等待的电平一致，当时间耗尽返回1，当变为等待的电平且时间为耗尽返回0
+	{
+		if(timeout_us == 0)
+			{
+				return 1;
+			}
+			
+		timeout_us--;
+		Delay_us(1);
+	}
+	return 0; 
+}
+	
+uint8_t DHT11_Check(void)
+{
+	if (DHT11_WaitLevel(0, 100))  return 1;
+    if (DHT11_WaitLevel(1, 100))  return 1;
+    if (DHT11_WaitLevel(0, 100))  return 1;
+
+    return 0;
 }
 
 
+uint8_t DHT11_Start(void)
+{
+	DHT11_OUT(0);
+    Delay_ms(20);
+    DHT11_OUT(1);
+    Delay_us(30);
+	
+	return DHT11_Check();
+}
+
+
+	
 void DHT11_GetData()
+{
+
+	
+}
+
+void DHT11_ReadData()
 {
 
 }
