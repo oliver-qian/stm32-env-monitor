@@ -1,4 +1,4 @@
-# STM32 温湿度采集系统
+# STM32 环境监测节点
 
 **状态**：开发中 · 2026-10 启动 · 最近更新 2026-11-01
 
@@ -209,9 +209,9 @@ STM32F103 的 PC13、PC14、PC15 由备份域供电，驱动电流和速度受�
 ## 目录结构
 
 ```text
-stm32-proj-01/
+stm32-env-monitor/
 ├── Objects/
-│   ├── object.uvprojx    # Keil 工程
+│   ├── stm32-env-monitor.uvprojx    # Keil 工程
 │   ├── Library/          # STM32 标准外设库
 │   ├── Stratup/          # 启动文件和内核文件
 │   ├── User/             # main.c、中断和用户代码
